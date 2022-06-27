@@ -1,0 +1,9 @@
+Results
+Total Files : 12
+excel files: 4
+Word files : 5
+ppt Files : 3
+Total sixe : 2674311
+excel size : 74262
+word size : 1196567
+ppt size : 1403482
