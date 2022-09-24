@@ -15,7 +15,9 @@ namespace Solution {
 
         Assert.AreEqual(expected, actual);
 
-        //todo | kafka | redis | grpc
+        //todo | kafka | redis | grpc | 
+        //http://localhost:3000/weatherforecast
+        //http://20.31.91.62/WeatherForecast
     }
 
     [Test]
