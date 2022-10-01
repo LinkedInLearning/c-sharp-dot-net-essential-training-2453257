@@ -10,12 +10,12 @@ namespace Solution
         {
             //arranje
             int _test;
-            string _resultExpected=string.Empty;
-            string _result=string.Empty;
+            string _resultExpected = string.Empty;
+            string _result = string.Empty;
             // act
             _resultExpected = "1";
             _test = 1;
-            _result=Kata.ToUnderscore(_test);
+            _result = Kata.ToUnderscore(_test);
             // assert
             Assert.That(_resultExpected.Equals(_result));
         }
@@ -118,6 +118,29 @@ namespace Solution
 
 namespace MyConsoleAppTests
 {
+    [TestFixture]
+    public static class ScrambliesTests
+    {
+        private static void testing(bool actual, bool expected)
+        {
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        [TestCase("rkqodlw", "world")]
+        [TestCase("cedewaraaossoqqyt", "codewars")]
+        [TestCase("katas", "steak")]
+        [TestCase("scriptjavx", "javascript")]
+        [TestCase("scriptingjava", "javascript")]
+        [TestCase("scriptsjava", "javascripts")]
+        [TestCase("javscripts", "javascript")]
+        [TestCase("aabbcamaomsccdd", "commas")]
+        [TestCase("commas", "commas")]
+        [TestCase("sammoc", "commas")]
+        public static void Scramble_ValidateAllTestCases_PassAllTests(string str1,string str2)
+        {
+            testing(Scramblies.Scramble(str1, str2), true);
+        }
+    }
     [TestFixture]
     public class StripCommentsTest
     {

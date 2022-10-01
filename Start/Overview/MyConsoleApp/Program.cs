@@ -3,17 +3,13 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Globalization;
 
+using System.Net.Sockets;
 // This program shows how to use the IPAddress class to obtain a server
 // IP addressess and related information.
-
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text.RegularExpressions;
-
+// using System;
+// using System.Net;
 namespace Mssc.Services.ConnectionManagement
 {
-
     class TestIPAddress
     {
 
@@ -100,10 +96,10 @@ namespace Mssc.Services.ConnectionManagement
         public static long IpsBetween(string start, string end)
         {
             long _returnTotalCount = -1;
-            string server = null;
+            string server ;
 
-            IPAddress _IPStart = null;
-            IPAddress _IPEnd = null;
+            IPAddress _IPStart ;
+            IPAddress _IPEnd ;
             // Define a regular expression to parse user's input.
             // This is a security check. It allows only
             // alphanumeric input string between 2 to 40 character long.
@@ -158,7 +154,7 @@ namespace Mssc.Services.ConnectionManagement
 
         public static void Main(string[] args)
         {
-            string server = null;
+            string server ;
             // Define a regular expression to parse user's input.
             // This is a security check. It allows only
             // alphanumeric input string between 2 to 40 character long.
@@ -396,7 +392,48 @@ public class SnailSolution
 }
 namespace MyConsoleApp
 {
+    public class Scramblies
+    {
 
+        public static bool Scramble(string str1, string str2)
+        {
+            bool _return = true;
+            //todo 1- iterate in each character of str1 and str2, to find a equal character , and if yes, remove character from str1;
+            for (int i = 0; i < str2.Length; i++)
+            {
+                // for (int j=0;j< str1.Length;j++)
+                // {
+                  int _indexOf=0;
+                    var _queryResult= from z in str1 
+                    where(z==char.Parse(str2[i].ToString()))
+                    select $"{z} + { _indexOf=str1.IndexOf(str2[i])}";
+
+
+                    if (!_queryResult.Equals(null))
+                    {
+                        str1=str1.Remove(_indexOf);
+                    }
+                    // if (!str1[j].Equals(str2[i]))
+                    // {
+                    //     _return = false;
+                    //     return _return;
+                    // }
+                    // else{
+                    //     str1=str1.Remove(j);
+                    // }
+                    // if (str2[i].Equals(str1[j]))
+                    // {
+                    //     _return=false;
+                    // }
+                // }
+                // if (!_return)
+                // {
+                //     return _return;
+                // }
+            }
+            return _return;
+        }
+    }
     public static class Kata
     {
         ///Complete the function/method so that it takes a PascalCase string and returns the string in snake_case notation. Lowercase characters can be numbers. If the method gets a number as input, it should return a string.
