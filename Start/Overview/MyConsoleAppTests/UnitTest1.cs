@@ -126,19 +126,19 @@ namespace MyConsoleAppTests
             Assert.AreEqual(expected, actual);
         }
         [Test]
-        [TestCase("rkqodlw", "world")]
-        [TestCase("cedewaraaossoqqyt", "codewars")]
-        [TestCase("katas", "steak")]
-        [TestCase("scriptjavx", "javascript")]
-        [TestCase("scriptingjava", "javascript")]
-        [TestCase("scriptsjava", "javascripts")]
-        [TestCase("javscripts", "javascript")]
-        [TestCase("aabbcamaomsccdd", "commas")]
-        [TestCase("commas", "commas")]
-        [TestCase("sammoc", "commas")]
-        public static void Scramble_ValidateAllTestCases_PassAllTests(string str1,string str2)
+        [TestCase("rkqodlw", "world",true)]
+        [TestCase("cedewaraaossoqqyt", "codewars",true)]
+        [TestCase("katas", "steak",false)]
+        [TestCase("scriptjavx", "javascript",false)]
+        [TestCase("scriptingjava", "javascript",true)]
+        [TestCase("scriptsjava", "javascripts",true)]
+        [TestCase("javscripts", "javascript",false)]
+        [TestCase("aabbcamaomsccdd", "commas",true)]
+        [TestCase("commas", "commas",true)]
+        [TestCase("sammoc", "commas",true)]
+        public static void Scramble_ValidateAllTestCases_PassAllTests(string str1,string str2,bool expectedResult)
         {
-            testing(Scramblies.Scramble(str1, str2), true);
+            testing(Scramblies.Scramble(str1, str2), expectedResult);
         }
     }
     [TestFixture]

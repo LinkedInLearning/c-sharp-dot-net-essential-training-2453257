@@ -96,10 +96,10 @@ namespace Mssc.Services.ConnectionManagement
         public static long IpsBetween(string start, string end)
         {
             long _returnTotalCount = -1;
-            string server ;
+            string server;
 
-            IPAddress _IPStart ;
-            IPAddress _IPEnd ;
+            IPAddress _IPStart;
+            IPAddress _IPEnd;
             // Define a regular expression to parse user's input.
             // This is a security check. It allows only
             // alphanumeric input string between 2 to 40 character long.
@@ -154,7 +154,7 @@ namespace Mssc.Services.ConnectionManagement
 
         public static void Main(string[] args)
         {
-            string server ;
+            string server;
             // Define a regular expression to parse user's input.
             // This is a security check. It allows only
             // alphanumeric input string between 2 to 40 character long.
@@ -394,42 +394,24 @@ namespace MyConsoleApp
 {
     public class Scramblies
     {
-
+        ///Complete the function scramble(str1, str2) that returns true if a portion of str1 characters can be rearranged to match str2, otherwise returns false.
         public static bool Scramble(string str1, string str2)
         {
             bool _return = true;
+            int _indexOf = 0;
             //todo 1- iterate in each character of str1 and str2, to find a equal character , and if yes, remove character from str1;
             for (int i = 0; i < str2.Length; i++)
             {
-                // for (int j=0;j< str1.Length;j++)
-                // {
-                  int _indexOf=0;
-                    var _queryResult= from z in str1 
-                    where(z==char.Parse(str2[i].ToString()))
-                    select $"{z} + { _indexOf=str1.IndexOf(str2[i])}";
-
-
-                    if (!_queryResult.Equals(null))
-                    {
-                        str1=str1.Remove(_indexOf);
-                    }
-                    // if (!str1[j].Equals(str2[i]))
-                    // {
-                    //     _return = false;
-                    //     return _return;
-                    // }
-                    // else{
-                    //     str1=str1.Remove(j);
-                    // }
-                    // if (str2[i].Equals(str1[j]))
-                    // {
-                    //     _return=false;
-                    // }
-                // }
-                // if (!_return)
-                // {
-                //     return _return;
-                // }
+                _indexOf = str1.IndexOf(str2[i]);
+                if (_indexOf > -1)
+                {
+                    str1 = str1.Remove(_indexOf, 1);
+                }
+                else
+                {
+                    _return = false;
+                    return _return ;
+                }
             }
             return _return;
         }
