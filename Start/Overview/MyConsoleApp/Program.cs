@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Globalization;
-
 using System.Net.Sockets;
 // This program shows how to use the IPAddress class to obtain a server
 // IP addressess and related information.
@@ -392,32 +393,316 @@ public class SnailSolution
 }
 namespace MyConsoleApp
 {
-    public class Scramblies
+    public class PagnationHelper<T>
     {
-        ///Complete the function scramble(str1, str2) that returns true if a portion of str1 characters can be rearranged to match str2, otherwise returns false.
-        public static bool Scramble(string str1, string str2)
+        // TODO: Complete this class
+        private List<T> collection;
+        private int itemCount;
+        public List<T> Collection { get => collection; }
+        private int itemsPerPage;
+        public int ItemsPerPage
         {
-            bool _return = true;
-            int _indexOf = 0;
-            //todo 1- iterate in each character of str1 and str2, to find a equal character , and if yes, remove character from str1;
-            for (int i = 0; i < str2.Length; i++)
+            //todo | research | get=>return >= itemsPerPage;
+            get { return itemsPerPage; }
+            set => itemsPerPage = value;
+        }
+
+        /// <summary>
+        /// The number of items within the collection
+        /// </summary>
+        public int ItemCount
+        {
+            get => itemCount;
+
+        }
+        /// <summary>
+        /// The number of pages
+        /// </summary>
+        public int PageCount
+        {
+            get
             {
-                _indexOf = str1.IndexOf(str2[i]);
-                if (_indexOf > -1)
+                return 0;
+            }
+        }
+        /// <summary>
+        /// Constructor, takes in a list of items and the number of items that fit within a single page
+        /// </summary>
+        /// <param name="collection">A list of items</param>
+        /// <param name="itemsPerPage">The number of items that fit within a single page</param>
+        public PagnationHelper(IList<T> collection, int itemsPerPage)
+        {
+            // collection
+        }
+        /// <summary>
+        /// Returns the number of items in the page at the given page index 
+        /// </summary>
+        /// <param name="pageIndex">The zero-based page index to get the number of items for</param>
+        /// <returns>The number of items on the specified page or -1 for pageIndex values that are out of range</returns>
+        public int PageItemCount(int pageIndex)
+        {
+            return this.PageIndex(pageIndex);
+        }
+
+        /// <summary>
+        /// Returns the page index of the page containing the item at the given item index.
+        /// </summary>
+        /// <param name="itemIndex">The zero-based index of the item to get the pageIndex for</param>
+        /// <returns>The zero-based page index of the page containing the item at the given item index or -1 if the item index is out of range</returns>
+        public int PageIndex(int itemIndex)
+        {
+            return 0;
+        }
+    }
+    public class JosephusSurvivor
+    {/*
+    In this kata you have to correctly return who is the "survivor", ie: the last element of a Josephus permutation.
+
+Basically you have to assume that n people are put into a circle and that they are eliminated in steps of k elements, like this:
+josephus_survivor(7,3) => means 7 people in a circle;
+one every 3 is eliminated until one remains
+[1,2,3,4,5,6,7] - initial sequence
+[1,2,4,5,6,7] => 3 is counted out
+[1,2,4,5,7] => 6 is counted out
+[1,4,5,7] => 2 is counted out
+[1,4,5] => 7 is counted out
+[1,4] => 5 is counted out
+[4] => 1 counted out, 4 is the last element - the survivor!
+*/
+        public static int JosSurvivor(int n, int k)
+        {//todo 1- iterate in a contructed list array wich elements begin in 1  en end in n | 2- remove element array considering offset | 3- when offset > array.Length survivor = next element
+            int _lastIndex = 0;
+            int _originalOffset = k - 1;
+            int _originalOffset_Increased = k;
+            List<int> _listintegers = new List<int>();
+            for (int i = 1; i <= n; i++)
+            {
+                _listintegers.Add(i);
+            }
+            int _aux = _originalOffset;//compatible to zero index methods
+            while (_aux < _listintegers.Count())
+            {
+                _listintegers.RemoveAt(_aux);
+
+                if ((_aux + _originalOffset_Increased) <= _listintegers.Count() - 1)
                 {
-                    str1 = str1.Remove(_indexOf, 1);
+                    _aux += _originalOffset;
                 }
                 else
-                {
-                    _return = false;
-                    return _return ;
-                }
+                    _aux = _originalOffset;
+                _lastIndex = _aux;
             }
-            return _return;
+            int _survivor = 0;
+            if (_lastIndex <= _listintegers.Count() - 1)
+                _survivor = _listintegers.ElementAt(_lastIndex++);
+            else _survivor = _listintegers.Last();
+            return _survivor;
         }
+    }
+    public class Scramblies
+    {
+        ///description: Best practise | clever
+        public static bool Scramble(string str1, string str2)
+        {
+            return str2.All(x => str1.Count(y => y == x) >= str2.Count(y => y == x));
+        }
+        ///Complete the function scramble(str1, str2) that returns true if a portion of str1 characters can be rearranged to match str2, otherwise returns false.
+        // public static bool Scramble(string str1, string str2)
+        // {
+        //     bool _return = true;
+        //     int _indexOf = 0;
+        //     //todo 1- iterate in each character of str1 and str2, to find a equal character , and if yes, remove character from str1;
+        //     for (int i = 0; i < str2.Length; i++)
+        //     {
+        //         _indexOf = str1.IndexOf(str2[i]);
+        //         if (_indexOf > -1)
+        //         {
+        //             str1 = str1.Remove(_indexOf, 1);
+        //         }
+        //         else
+        //         {
+        //             _return = false;
+        //             return _return ;
+        //         }
+        //     }
+        //     return _return;
+        // }
+
+    }
+
+    public class Answer
+    {
+        /// multisition technical Exame
+        /*
+        <returns>the character of which s is the​​​​​​‌​​‌​​‌​‌​‌​‌‌​‌‌‌​​‌​‌‌‌ representation</returns>
+        */
+        public static char ScanChar(string s)
+        {
+            if (!s.Equals(string.Empty))
+                return char.Parse(Regex.Replace(s, "[a-zA-Z]"
+              , new MatchEvaluator(z => ((z.Value[0] + (Char.IsLetter(z.Value, 0) ? z.Value : "?"))))));
+            return char.Parse(string.Empty);
+        }
+    }
+    public class BinarySearch
+    {
+        public static bool Exists(int[] ints, int k)
+        {
+            if (ints.Length == 0)
+                return false;
+            int _min = ints[0];
+            int _max = ints[ints.Length - 1];
+            if (BinarySearchOnArray(ints, _min, _max, k).Equals(-1))
+                return false;
+            return true;
+        }
+        public static int BinarySearchOnArray(int[] array, int minPostionArray, int maxPostitionArray, int middleElement)
+        {
+            if (maxPostitionArray >= minPostionArray)
+            {
+                int _middle = minPostionArray + (maxPostitionArray - middleElement) / 2;
+                if (array[_middle] == middleElement) return _middle;
+                if (array[_middle] > middleElement)
+                    return BinarySearchOnArray(array, minPostionArray, _middle - 1, middleElement);
+                return BinarySearchOnArray(array, _middle + 1, maxPostitionArray, middleElement);
+            }
+            return -1;
+        }
+
     }
     public static class Kata
     {
+        /*
+        Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+
+        if(numbers.Length==0)
+        return -1;
+int _max=0;
+       for (int i=0;i<numbers.Length;i++){
+       if(_max<numbers[i])
+       _max=numbers[i];
+       }
+       return _max;
+        */
+        public static int[] MoveZeroes(int[] arr)
+        {
+
+            if (arr.Length == 0) return arr;
+            int[] _array = new int[] { };
+
+            List<int> _listIntegers = new List<int>();
+            _listIntegers= arr.ToList();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (_listIntegers.ElementAt(i).Equals(0))
+                {
+                    _listIntegers.RemoveAt(i);
+                    _listIntegers.Add(0);
+                }
+                //questions  review  : 6,8,9
+            }
+            Console.WriteLine(_listIntegers.Max(z=>z.ToString()));
+            return _listIntegers.ToArray();
+        }
+
+        /*In mathematics, the factorial of integer n is written as n!. It is equal to the product of n and every integer preceding it. For example: 5! = 1 x 2 x 3 x 4 x 5 = 120
+
+Your mission is simple: write a function that takes an integer n and returns the value of n!.
+
+You are guaranteed an integer argument. For any values outside the non-negative range, return null, nil or None (return an empty string "" in C and C++). For non-negative numbers a full length number is expected for example, return 25! =  "15511210043330985984000000"  as a string.
+
+For more on factorials, see http://en.wikipedia.org/wiki/Factorial
+
+NOTES:
+
+The use of BigInteger or BigNumber functions has been disabled, this requires a complex solution
+
+I have removed the use of require in the javascript language.
+
+*/
+        public static string Factorial(int n)
+        {
+            int factorial = n;
+            if (n == 0) return 1.ToString();
+            if (n < 0) return string.Empty;
+            for (int i = 1; i <= n; i++)
+            {
+                factorial = factorial * i;
+            }
+            return factorial.ToString();
+        }
+        /*
+        How can you tell an extrovert from an introvert at NSA? Va gur ryringbef, gur rkgebireg ybbxf ng gur BGURE thl'f fubrf.
+
+I found this joke on USENET, but the punchline is scrambled. Maybe you can decipher it? According to Wikipedia, ROT13 (http://en.wikipedia.org/wiki/ROT13) is frequently used to obfuscate jokes on USENET.
+
+Hint: For this task you're only supposed to substitue characters. Not spaces, punctuation, numbers etc.
+*/
+
+        ///best practice2
+        //   public static string Rot13(string input)
+        //   {
+        //      var s1 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+        //      var s2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        //      return string.Join("", input.Select(x => char.IsLetter(x)?s1[s2.IndexOf(x)]:x));
+        //   }
+
+        ///best practice1
+        public static string Rot13(string input) =>
+        Regex.Replace(input, "[a-zA-Z]"
+        , new MatchEvaluator(z => ((char)(z.Value[0] + (Char.ToLower(z.Value[0]) >= 'n' ? -13 : 13))).ToString()));
+        // Regex.Replace(input, "[a-zA-Z]", new MatchEvaluator(c => ((char)(c.Value[0] + (Char.ToLower(c.Value[0]) >= 'n' ? -13 : 13))).ToString()));
+
+        // public static string Rot13(string input)
+        // {//todo 1- create a collection to save the cypher | 2- evaluate the input and encrypt it
+
+        //     string _return = string.Empty;
+        //     Dictionary<char, char> _ROT13Collection = new Dictionary<char, char>();
+        //     _ROT13Collection.Add('A', 'N');
+        //     _ROT13Collection.Add('B', 'O');
+        //     _ROT13Collection.Add('C', 'P');
+        //     _ROT13Collection.Add('D', 'Q');
+        //     _ROT13Collection.Add('E', 'R');
+        //     _ROT13Collection.Add('F', 'S');
+        //     _ROT13Collection.Add('G', 'T');
+        //     _ROT13Collection.Add('H', 'U');
+        //     _ROT13Collection.Add('I', 'V');
+        //     _ROT13Collection.Add('J', 'W');
+        //     _ROT13Collection.Add('K', 'X');
+        //     _ROT13Collection.Add('L', 'Y');
+        //     _ROT13Collection.Add('M', 'Z');
+        //     Tuple<char, char> _tuple = new Tuple<char, char>('A', 'N');
+
+        //     foreach (var item in input)
+        //     {
+        //         bool _isUpper = false;
+        //         char _auxItem;
+        //         string _aux =string.Empty;
+        //         if (char.IsLower(item))
+        //         {
+        //             _auxItem = char.Parse(item.ToString().ToUpper());
+        //             _isUpper = true;
+        //         }
+        //         else
+        //             _auxItem = item;
+
+        //         if (_ROT13Collection.ContainsKey(_auxItem))
+        //         {
+        //             _aux = _ROT13Collection.Where(z => z.Key == _auxItem).Select(z => z.Value).First().ToString();
+        //         }
+        //         else if (_ROT13Collection.ContainsValue(_auxItem))
+        //             _aux = _ROT13Collection.Where(z => z.Value == _auxItem).Select(z => z.Key).First().ToString();
+        //         else
+        //             _return += item;
+        //         if (_isUpper) 
+        //         _return += _aux.ToString().ToLower();
+        //         else 
+        //         _return+=_aux;
+        //     }
+
+        //     return _return;
+        // }
+
         ///Complete the function/method so that it takes a PascalCase string and returns the string in snake_case notation. Lowercase characters can be numbers. If the method gets a number as input, it should return a string.
         public static string ToUnderscore(int str) => str.ToString();
         // public static string ToUnderscore(int str)

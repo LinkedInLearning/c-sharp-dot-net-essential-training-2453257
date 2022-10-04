@@ -119,6 +119,125 @@ namespace Solution
 namespace MyConsoleAppTests
 {
     [TestFixture]
+    public class BinarySearchTest
+    { [Test]
+        [TestCase("?","1")]
+        public void ScanChar_Return(string expectedResult,string input)
+        {
+            Assert.Equals(expectedResult
+            , Answer.ScanChar(input));
+        }
+        [Test]
+        [TestCase(2, new int[] { 0, 1, 2, 3, 4 }, 0, 5, 2)]
+        public void BinarySearchTest_SearchForMiddleElement_ReturnElementIndex(int expectedResult, int[] array, int minPostionArray, int maxPostitionArray, int middleElement)
+        {
+            Assert.AreEqual(expectedResult
+            , BinarySearch.BinarySearchOnArray(array, minPostionArray, maxPostitionArray, middleElement));
+        }
+    }
+    [TestFixture]
+    public class SolutionTest
+    {
+        private readonly IList<int> collection = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+        private PagnationHelper<int> helper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            helper = new PagnationHelper<int>(collection, 10);
+        }
+
+        [Test]
+        [TestCase(-1, ExpectedResult = -1)]
+        [TestCase(1, ExpectedResult = 10)]
+        [TestCase(3, ExpectedResult = -1)]
+        public int PageItemCountTest(int pageIndex)
+        {
+            return helper.PageItemCount(pageIndex);
+        }
+
+        [Test]
+        [TestCase(-1, ExpectedResult = -1)]
+        [TestCase(12, ExpectedResult = 1)]
+        [TestCase(24, ExpectedResult = -1)]
+        public int PageIndexTest(int itemIndex)
+        {
+            return helper.PageIndex(itemIndex);
+        }
+
+        [Test]
+        public void ItemCountTest()
+        {
+            Assert.AreEqual(24, helper.ItemCount);
+        }
+
+        [Test]
+        public void PageCountTest()
+        {
+            Assert.AreEqual(3, helper.PageCount);
+        }
+    }
+    [TestFixture]
+    public class KataTests
+    {
+    [Test]
+    // [TestCase(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0},new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1})]
+    public void MoveZeroes_MovexerostoTheEndArray_ResturnArray(
+        // int[] expectedResult, int[] result
+        )
+    {
+    //   Assert.AreEqual(expectedResult, Kata.MoveZeroes(result));
+      Assert.AreEqual(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0}, Kata.MoveZeroes(new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1}));
+    }
+        [Test]
+        [TestCase("1", 1)]
+        [TestCase("120", 5)]
+        [TestCase("362880", 9)]
+        [TestCase("1307674368000", 15)]
+        public void Factorial_CalculateFactorial_ReturnStringWithFactoialSum(string expected, int n)
+        {
+            Assert.AreEqual(expected, Kata.Factorial(n));
+        }
+    }
+    [TestFixture]
+    public class SystemTests
+    {
+        [Test]
+        public void Rot13_EncriptMessageInput_Encryptionsuccessfull()
+        {
+            Assert.AreEqual("ROT13 example.", Kata.Rot13("EBG13 rknzcyr."));
+        }
+    }
+    [TestFixture]
+    public static class JosephusSurvivorTests
+    {
+
+        private static void testing(int actual, int expected)
+        {
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        [TestCase(7, 3, 4)]
+        // [TestCase(11,19,10)]
+        // [TestCase(40,3,28)]
+        // [TestCase(14,2,13)]
+        // [TestCase(100,1,100)]
+        // [TestCase(1,300,1)]
+        // [TestCase(2,300,1)]
+        // [TestCase(5,300,1)]
+        // [TestCase(7,300,7)]
+        // [TestCase(300,300,265)]
+        public static void test1(int n, int offset, int survivor)
+        {        //test project creation:
+                 // dotnet new console -o $PROJECT_NAME  # PROJECT_NAME is a directory name
+                 // dotnet add package Microsoft.NET.Test.Sdk
+                 // dotnet add package Nunit3TestAdapter
+                 //  dotnet add package NUnit
+            Console.WriteLine("Basic Tests JosSurvivor");
+            testing(JosephusSurvivor.JosSurvivor(n, offset), survivor);
+        }
+    }
+    [TestFixture]
     public static class ScrambliesTests
     {
         private static void testing(bool actual, bool expected)
@@ -126,17 +245,17 @@ namespace MyConsoleAppTests
             Assert.AreEqual(expected, actual);
         }
         [Test]
-        [TestCase("rkqodlw", "world",true)]
-        [TestCase("cedewaraaossoqqyt", "codewars",true)]
-        [TestCase("katas", "steak",false)]
-        [TestCase("scriptjavx", "javascript",false)]
-        [TestCase("scriptingjava", "javascript",true)]
-        [TestCase("scriptsjava", "javascripts",true)]
-        [TestCase("javscripts", "javascript",false)]
-        [TestCase("aabbcamaomsccdd", "commas",true)]
-        [TestCase("commas", "commas",true)]
-        [TestCase("sammoc", "commas",true)]
-        public static void Scramble_ValidateAllTestCases_PassAllTests(string str1,string str2,bool expectedResult)
+        [TestCase("rkqodlw", "world", true)]
+        [TestCase("cedewaraaossoqqyt", "codewars", true)]
+        [TestCase("katas", "steak", false)]
+        [TestCase("scriptjavx", "javascript", false)]
+        [TestCase("scriptingjava", "javascript", true)]
+        [TestCase("scriptsjava", "javascripts", true)]
+        [TestCase("javscripts", "javascript", false)]
+        [TestCase("aabbcamaomsccdd", "commas", true)]
+        [TestCase("commas", "commas", true)]
+        [TestCase("sammoc", "commas", true)]
+        public static void Scramble_ValidateAllTestCases_PassAllTests(string str1, string str2, bool expectedResult)
         {
             testing(Scramblies.Scramble(str1, str2), expectedResult);
         }
@@ -234,7 +353,7 @@ namespace MyConsoleAppTests
         }
     }
     [TestFixture]
-    public class SolutionTest
+    public class SolutionTests
     {
         [Test]
         public void SmallPyramidTest()
