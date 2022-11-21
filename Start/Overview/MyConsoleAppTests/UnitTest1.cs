@@ -119,6 +119,19 @@ namespace Solution
 namespace MyConsoleAppTests
 {
     [TestFixture]
+public class JadenCaseTest
+{
+  [Test]
+  public void JapenCase_TurnOn_CamelCase_JadenCaseFormattedString()
+  {
+    Assert.AreEqual("How Can Mirrors Be Real If Our Eyes Aren't Real",
+                    "How can mirrors be real if our eyes aren't real".ToJadenCase(),
+                    "Strings didn't match.");
+                   // quantidade prestaçõis restantes
+                   //valor prestação
+  }
+}
+    [TestFixture]
     public class BinarySearchTest
     { [Test]
         [TestCase("?","1")]

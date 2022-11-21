@@ -186,213 +186,243 @@ namespace Mssc.Services.ConnectionManagement
         }
     }
 }
-public class StripCommentsSolution
-{
-    ///Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.
-    public static string StripComments(string text, string[] commentSymbols)
-    {//todo 1- get substring from 0 to NewLine |2 - apply regex into previous substring| 3-apply to return value
-        string _return = string.Empty;
-        string[] _auxText = text.Split(Environment.NewLine, int.MaxValue, StringSplitOptions.RemoveEmptyEntries);
-        int _count = 0;
-        Dictionary<string, List<string>> _auxDic = new Dictionary<string, List<string>>();
-        string _auxString = string.Empty;
-        for (int j = 0; j < _auxText.Length; j++)
-        {
-            for (int i = 0; i < commentSymbols.Length; i++)
-            {
-                List<string> _auxList = new List<string>();
-                if (!_auxDic.TryGetValue(_auxText[j], out _auxList))
-                {
-                    if (_auxList.Count() == 0) _auxList = new List<string>();
-                    if (_auxList.Contains(commentSymbols[i]))
-                    {
-                        _auxList.Add(commentSymbols[i]);
-                        _auxDic.Add(_auxText[j], _auxList);
-                        string regex = string.Format(@"^(?:(?!\s{0})(?!\sdef).)*", commentSymbols[i]);
-                        var _match = Regex.Match(_auxText[j], regex);
-                        // if (_match.Success)
-                        // {
-                        string _auxValue = _match.Value;
-                        _return += _auxValue;
-                        if (_count < _auxText.Length - 1)
-                        {
-                            _return += Environment.NewLine;
-                            _count++;
-                        }
-                        // }
-                        // else
-                        // _return+=_auxText[j];
-                    }
-                }
-                // else{
-                //     _return+=_auxText[j];
-                // }
-            }
-        }
-        return _return;
-    }
-}
-public class SnailSolution
-{
-    static void WentLeft(int[][] array, List<int> _returnList, int _next, bool _wentLeft, bool _wentUp, int i)
-    {
-        int _auxX = array.Length - 1;
-        int _auxY = array[i].Length - 1;
-        for (int q = _next; q >= 0; q--)
-        {
-            _returnList.Add(array[array.Length - 1][q]);
-            _next = q;
-        }
-        _wentLeft = false;
-        _wentUp = true;
-        _next = _next + 1;
-    }
-    static void WentDown(int _next, int[][] array, List<int> _returnList, bool _wentDown, bool _wentLeft, int j)
-    {
-        for (int k = _next; k < array.Length; k++)
-        {
-            _returnList.Add(array[k][j]);
-            _next = j;
-        }
-        _wentDown = false;
-        _wentLeft = true;
-        _next = _next - 1;
-    }
-    static void WentUp(int[][] array, decimal _auxMiddle, List<int> _returnList, bool _wentUp, bool _wentRight, int _auxMiddle2)
-    {
-        int _auxRowLengthMinusOne = array.Length - 1;
-        if (_auxRowLengthMinusOne % 2 == 0)
-        {
-            _auxMiddle = _auxRowLengthMinusOne / 2;
-            _auxRowLengthMinusOne = _auxRowLengthMinusOne - 1;
-        }
-        else
-        {
-            _auxMiddle = Math.Round(Convert.ToDecimal(_auxRowLengthMinusOne / 2), 0, MidpointRounding.ToEven);
-            _auxMiddle = _auxMiddle + 1;
-        }
-        for (int q = _auxRowLengthMinusOne; q >= _auxMiddle; q--)
-        {
-            _returnList.Add(array[q][0]);
-        }
-        _wentUp = false;
-        _wentRight = true;
-        _auxMiddle2 = _auxRowLengthMinusOne;
-    }
-    static void WentRight(int[][] array, decimal _auxMiddle, int _auxMiddle2, List<int> _returnList, bool _wentRight, bool _isGoalAchivied, int i)
-    {
-        int _auxColumnLength = array[i].Length - 1;
-        if (_auxColumnLength % 2 == 0)
-        {
-            _auxMiddle = _auxColumnLength / 2;
-        }
-        else
-        {
-            _auxMiddle = Math.Round(Convert.ToDecimal(_auxColumnLength / 2), 0, MidpointRounding.ToEven);
-            _auxMiddle = _auxMiddle + 1;
-        }
-        decimal _auxDec = (_auxColumnLength) / 2;//to consider the 0 position
-        _auxDec = _auxDec / 2;
-        decimal _auxq = Math.Round(Convert.ToDecimal(_auxDec), MidpointRounding.ToEven);
-        // int _auxMiddle = int.Parse(_auxq.ToString());
-        int _aux1;
-        if (int.TryParse(_auxMiddle2.ToString(), out _aux1))
-        {
-            for (int q = _auxMiddle2; q <= _auxMiddle; q++)
-            {
-                _returnList.Add(array[_auxMiddle2][q]);
-            }
-            _wentRight = false;
-            _isGoalAchivied = true;
-        }
-        else throw new Exception("Convertion error on middle value");
-    }
-    public static int[] BublerSortRecursive(int[] array, int length)
-    {
-        if (length == 1)
-        {
-            return array;
-        }
-        int _count = 0;
-        for (int i = 0; i < length - 1; i++)
-        {
-            if (array[i] > array[i + 1])
-            {
-                int _temp = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = _temp;
-                _count++;
-            }
-        }
-        if (_count == 0)
-        {
-            return array;
-        }
-        return BublerSortRecursive(array, length - 1);
-    }
-
-    ///Given an n x n array, return the array elements arranged from outermost elements to the middle element, traveling clockwise.
-    ///todo | 1 determine the row length and column length| 2- execute the snail path 
-    public static int[] Snail(int[][] array)
-    {
-        int[] _return = new int[] { };
-        List<int> _returnList = new List<int>();
-        int _rowLength = array.Length - 1;
-        int _next = 0;
-        int _columnLength = 0;
-        bool _wentDown = false;
-        bool _wentLeft = false;
-        bool _wentUp = false;
-        bool _wentRight = false;
-        bool _isToAdd = true;
-        bool _isGoalAchivied = false;
-        decimal _auxMiddle = 0;
-        int _auxMiddle2 = 0;
-        try
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                for (int j = 0; j < array[i].Length; j++)
-                {
-                    if (!_isGoalAchivied)
-                    {
-                        _columnLength = array[i].Length - 1;
-                        if (_isToAdd) _returnList.Add(array[i][j]);
-                        if (_columnLength.Equals(j))
-                        {
-                            _wentDown = true;
-                            _isToAdd = false;
-                            _next = i + 1;
-                        }
-                        if (_wentDown)
-                        {
-                            WentDown(_next, array, _returnList, _wentDown, _wentLeft, j);
-                        }
-                        if (_wentLeft)
-                        {
-                            WentLeft(array, _returnList, _next, _wentLeft, _wentUp, i);
-                        }
-                        if (_wentUp)
-                        {
-                            WentUp(array, _auxMiddle, _returnList, _wentUp, _wentRight, _auxMiddle2);
-                        }
-                        if (_wentRight)
-                        {
-                            WentRight(array, _auxMiddle, _auxMiddle2, _returnList, _wentRight, _isGoalAchivied, i);
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception e)
-        {
-            Console.WriteLine($" {Environment.NewLine}Stack{e.ToString()}");
-        }
-        return _returnList.ToArray();
-    }
-}
 namespace MyConsoleApp
 {
+    public static class JadenCase
+    {
+        ///Best patrice
+        public static string ToJadenCase(this string phrase)
+        {
+            //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(phrase);
+            return string.Join(" ",phrase.Split().Select(z=>Char.ToUpper(z[0])+z.Substring(1)));
+                // return string.Join(" ", phrase.Split().Select(i => Char.ToUpper(i[0]) + i.Substring(1)));
+        }
+        /*
+        public static string ToJadenCase(this string phrase)
+        {
+            string[] _str = phrase.Split(' ');
+            string _formatted = string.Empty;
+            for (int i = 0; i < _str.Length; i++)
+            {
+                _formatted += string.Join("", _str[i].First().ToString().ToUpper());
+                _formatted += string.Join("", _str[i].Skip(1).ToArray());
+                if (i != _str.Length - 1)
+                {
+                    _formatted += " ";
+                }
+                Console.WriteLine("_formatted {0}", _formatted);
+            }
+            return _formatted;
+        }
+        */
+    }
+    public class SnailSolution
+    {
+        static void WentLeft(int[][] array, List<int> _returnList, int _next, bool _wentLeft, bool _wentUp, int i)
+        {
+            int _auxX = array.Length - 1;
+            int _auxY = array[i].Length - 1;
+            for (int q = _next; q >= 0; q--)
+            {
+                _returnList.Add(array[array.Length - 1][q]);
+                _next = q;
+            }
+            _wentLeft = false;
+            _wentUp = true;
+            _next = _next + 1;
+        }
+        static void WentDown(int _next, int[][] array, List<int> _returnList, bool _wentDown, bool _wentLeft, int j)
+        {
+            for (int k = _next; k < array.Length; k++)
+            {
+                _returnList.Add(array[k][j]);
+                _next = j;
+            }
+            _wentDown = false;
+            _wentLeft = true;
+            _next = _next - 1;
+        }
+        static void WentUp(int[][] array, decimal _auxMiddle, List<int> _returnList, bool _wentUp, bool _wentRight, int _auxMiddle2)
+        {
+            int _auxRowLengthMinusOne = array.Length - 1;
+            if (_auxRowLengthMinusOne % 2 == 0)
+            {
+                _auxMiddle = _auxRowLengthMinusOne / 2;
+                _auxRowLengthMinusOne = _auxRowLengthMinusOne - 1;
+            }
+            else
+            {
+                _auxMiddle = Math.Round(Convert.ToDecimal(_auxRowLengthMinusOne / 2), 0, MidpointRounding.ToEven);
+                _auxMiddle = _auxMiddle + 1;
+            }
+            for (int q = _auxRowLengthMinusOne; q >= _auxMiddle; q--)
+            {
+                _returnList.Add(array[q][0]);
+            }
+            _wentUp = false;
+            _wentRight = true;
+            _auxMiddle2 = _auxRowLengthMinusOne;
+        }
+        static void WentRight(int[][] array, decimal _auxMiddle, int _auxMiddle2, List<int> _returnList, bool _wentRight, bool _isGoalAchivied, int i)
+        {
+            int _auxColumnLength = array[i].Length - 1;
+            if (_auxColumnLength % 2 == 0)
+            {
+                _auxMiddle = _auxColumnLength / 2;
+            }
+            else
+            {
+                _auxMiddle = Math.Round(Convert.ToDecimal(_auxColumnLength / 2), 0, MidpointRounding.ToEven);
+                _auxMiddle = _auxMiddle + 1;
+            }
+            decimal _auxDec = (_auxColumnLength) / 2;//to consider the 0 position
+            _auxDec = _auxDec / 2;
+            decimal _auxq = Math.Round(Convert.ToDecimal(_auxDec), MidpointRounding.ToEven);
+            // int _auxMiddle = int.Parse(_auxq.ToString());
+            int _aux1;
+            if (int.TryParse(_auxMiddle2.ToString(), out _aux1))
+            {
+                for (int q = _auxMiddle2; q <= _auxMiddle; q++)
+                {
+                    _returnList.Add(array[_auxMiddle2][q]);
+                }
+                _wentRight = false;
+                _isGoalAchivied = true;
+            }
+            else throw new Exception("Convertion error on middle value");
+        }
+        public static int[] BublerSortRecursive(int[] array, int length)
+        {
+            if (length == 1)
+            {
+                return array;
+            }
+            int _count = 0;
+            for (int i = 0; i < length - 1; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    int _temp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = _temp;
+                    _count++;
+                }
+            }
+            if (_count == 0)
+            {
+                return array;
+            }
+            return BublerSortRecursive(array, length - 1);
+        }
+        ///Given an n x n array, return the array elements arranged from outermost elements to the middle element, traveling clockwise.
+        ///todo | 1 determine the row length and column length| 2- execute the snail path 
+        public static int[] Snail(int[][] array)
+        {
+            int[] _return = new int[] { };
+            List<int> _returnList = new List<int>();
+            int _rowLength = array.Length - 1;
+            int _next = 0;
+            int _columnLength = 0;
+            bool _wentDown = false;
+            bool _wentLeft = false;
+            bool _wentUp = false;
+            bool _wentRight = false;
+            bool _isToAdd = true;
+            bool _isGoalAchivied = false;
+            decimal _auxMiddle = 0;
+            int _auxMiddle2 = 0;
+            try
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    for (int j = 0; j < array[i].Length; j++)
+                    {
+                        if (!_isGoalAchivied)
+                        {
+                            _columnLength = array[i].Length - 1;
+                            if (_isToAdd) _returnList.Add(array[i][j]);
+                            if (_columnLength.Equals(j))
+                            {
+                                _wentDown = true;
+                                _isToAdd = false;
+                                _next = i + 1;
+                            }
+                            if (_wentDown)
+                            {
+                                WentDown(_next, array, _returnList, _wentDown, _wentLeft, j);
+                            }
+                            if (_wentLeft)
+                            {
+                                WentLeft(array, _returnList, _next, _wentLeft, _wentUp, i);
+                            }
+                            if (_wentUp)
+                            {
+                                WentUp(array, _auxMiddle, _returnList, _wentUp, _wentRight, _auxMiddle2);
+                            }
+                            if (_wentRight)
+                            {
+                                WentRight(array, _auxMiddle, _auxMiddle2, _returnList, _wentRight, _isGoalAchivied, i);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine($" {Environment.NewLine}Stack{e.ToString()}");
+            }
+            return _returnList.ToArray();
+        }
+    }
+
+    public class StripCommentsSolution
+    {
+        ///Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.
+        public static string StripComments(string text, string[] commentSymbols)
+        {//todo 1- get substring from 0 to NewLine |2 - apply regex into previous substring| 3-apply to return value
+            string _return = string.Empty;
+            string[] _auxText = text.Split(Environment.NewLine, int.MaxValue, StringSplitOptions.RemoveEmptyEntries);
+            int _count = 0;
+            Dictionary<string, List<string>> _auxDic = new Dictionary<string, List<string>>();
+            string _auxString = string.Empty;
+            for (int j = 0; j < _auxText.Length; j++)
+            {
+                for (int i = 0; i < commentSymbols.Length; i++)
+                {
+                    List<string> _auxList = new List<string>();
+                    if (!_auxDic.TryGetValue(_auxText[j], out _auxList))
+                    {
+                        if (_auxList.Count() == 0) _auxList = new List<string>();
+                        if (_auxList.Contains(commentSymbols[i]))
+                        {
+                            _auxList.Add(commentSymbols[i]);
+                            _auxDic.Add(_auxText[j], _auxList);
+                            string regex = string.Format(@"^(?:(?!\s{0})(?!\sdef).)*", commentSymbols[i]);
+                            var _match = Regex.Match(_auxText[j], regex);
+                            // if (_match.Success)
+                            // {
+                            string _auxValue = _match.Value;
+                            _return += _auxValue;
+                            if (_count < _auxText.Length - 1)
+                            {
+                                _return += Environment.NewLine;
+                                _count++;
+                            }
+                            // }
+                            // else
+                            // _return+=_auxText[j];
+                        }
+                    }
+                    // else{
+                    //     _return+=_auxText[j];
+                    // }
+                }
+            }
+            return _return;
+        }
+    }
+
+
     public class PagnationHelper<T>
     {
         // TODO: Complete this class
@@ -591,7 +621,7 @@ int _max=0;
             int[] _array = new int[] { };
 
             List<int> _listIntegers = new List<int>();
-            _listIntegers= arr.ToList();
+            _listIntegers = arr.ToList();
             for (int i = 0; i < arr.Length; i++)
             {
                 if (_listIntegers.ElementAt(i).Equals(0))
@@ -601,7 +631,7 @@ int _max=0;
                 }
                 //questions  review  : 6,8,9
             }
-            Console.WriteLine(_listIntegers.Max(z=>z.ToString()));
+            Console.WriteLine(_listIntegers.Max(z => z.ToString()));
             return _listIntegers.ToArray();
         }
 
