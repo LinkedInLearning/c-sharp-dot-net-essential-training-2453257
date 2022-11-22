@@ -1,10 +1,12 @@
-﻿using System;
+﻿// using System;
 using System.Net;
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+// using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Globalization;
+// using System.Globalization;
 using System.Net.Sockets;
+using System.Linq;
+using System.Text;
 // This program shows how to use the IPAddress class to obtain a server
 // IP addressess and related information.
 // using System;
@@ -194,8 +196,7 @@ namespace MyConsoleApp
         public static string ToJadenCase(this string phrase)
         {
             //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(phrase);
-            return string.Join(" ",phrase.Split().Select(z=>Char.ToUpper(z[0])+z.Substring(1)));
-                // return string.Join(" ", phrase.Split().Select(i => Char.ToUpper(i[0]) + i.Substring(1)));
+            return string.Join(" ", phrase.Split().Select(z => Char.ToUpper(z[0]) + z.Substring(1)));
         }
         /*
         public static string ToJadenCase(this string phrase)
@@ -598,10 +599,51 @@ one every 3 is eliminated until one remains
             }
             return -1;
         }
-
     }
     public static class Kata
     {
+        public static bool IsPangram(string str)
+        {
+            // return str.Where(ch => Char.IsLetter(ch)).Select(ch => Char.ToLower(ch)).Distinct().Count() == 26;
+            // return "abcdefghijklmnopqrstuvwxyz".All(x => str.ToLower().Contains(char.ToLower(x)));
+            return str.ToUpper().Where(char.IsLetter).Distinct().Count() == 26;
+
+        }
+        /*
+                public static bool IsPangram(string str)
+                {
+                    string _alphabet = "a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9";
+                    var _auxArray = _alphabet.Split(' ');
+                    Dictionary<char,bool> _dic=new Dictionary<char, bool>();
+                    foreach (var item in _auxArray)
+                    {
+                        _dic.Add(char.Parse(item),false);
+                    }
+                    Regex _regex = new Regex("[^a-zA-Z0-9]");
+                    string _str = _regex.Replace(str, "");
+                    _str = _str.ToLower();
+                    StringBuilder _sb = new StringBuilder();
+                    foreach (var item in _str)
+                    {
+                        if (!Char.IsPunctuation(item)||Char.IsWhiteSpace(item))
+                        {
+                            _sb.Append(item);
+                        }
+                    }
+                    string _aq = new string(_str.Where(z => Char.IsPunctuation(z)).ToArray());
+                    // return _auxArray.Any(_str.Contains);
+
+                    foreach (var item in _sb.ToString().ToArray())
+                    {
+                        Console.WriteLine(item);
+                        if (_auxArray.Any(z => item.ToString().Contains(z)))
+                        {
+                            _dic[item]= true;
+                        }
+                    }
+                    return _dic.ContainsValue(false);
+                }
+                */
         /*
         Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
 

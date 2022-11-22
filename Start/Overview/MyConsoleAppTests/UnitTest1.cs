@@ -119,23 +119,24 @@ namespace Solution
 namespace MyConsoleAppTests
 {
     [TestFixture]
-public class JadenCaseTest
-{
-  [Test]
-  public void JapenCase_TurnOn_CamelCase_JadenCaseFormattedString()
-  {
-    Assert.AreEqual("How Can Mirrors Be Real If Our Eyes Aren't Real",
-                    "How can mirrors be real if our eyes aren't real".ToJadenCase(),
-                    "Strings didn't match.");
-                   // quantidade prestaçõis restantes
-                   //valor prestação
-  }
-}
+    public class JadenCaseTest
+    {
+        [Test]
+        public void JapenCase_TurnOn_CamelCase_JadenCaseFormattedString()
+        {
+            Assert.AreEqual("How Can Mirrors Be Real If Our Eyes Aren't Real",
+                            "How can mirrors be real if our eyes aren't real".ToJadenCase(),
+                            "Strings didn't match.");
+            // quantidade prestaçõis restantes
+            //valor prestação
+        }
+    }
     [TestFixture]
     public class BinarySearchTest
-    { [Test]
-        [TestCase("?","1")]
-        public void ScanChar_Return(string expectedResult,string input)
+    {
+        [Test]
+        [TestCase("?", "1")]
+        public void ScanChar_Return(string expectedResult, string input)
         {
             Assert.Equals(expectedResult
             , Answer.ScanChar(input));
@@ -191,17 +192,53 @@ public class JadenCaseTest
         }
     }
     [TestFixture]
-    public class KataTests
+    public class IsPangramTest
     {
-    [Test]
-    // [TestCase(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0},new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1})]
-    public void MoveZeroes_MovexerostoTheEndArray_ResturnArray(
-        // int[] expectedResult, int[] result
-        )
-    {
-    //   Assert.AreEqual(expectedResult, Kata.MoveZeroes(result));
-      Assert.AreEqual(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0}, Kata.MoveZeroes(new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1}));
+        [Test]
+        public void IsPangram_VerifyIfItsPangram_ReturnTrue()
+        {
+            Assert.AreEqual(true, Kata.IsPangram("The quick brown fox jumps over the lazy dog."));
+        }
+        [Test]
+        public void IsPangram_VerifyLongString1IsPangram_ReturnTrue()
+        {
+            // arrange
+            // act
+            // assert
+            Assert.AreEqual(true,Kata.IsPangram( "Raw Danger! (Zettai Zetsumei Toshi 2) for the PlayStation 2 is a bit queer, but an alright game I guess, uh... CJ kicks and vexes Tenpenny precariously? This should be a pangram now, probably."));
+        }
+        [Test]
+        public void IsPangram_VerifyLongString2IsPangram_ReturnTrue()=>
+            Assert.AreEqual(true,Kata.IsPangram("Pack my box with five dozen liquor jugs."));
+        [Test]
+        public void IsPangram_VerifyLongString3IsPangram_ReturnTrue()=>
+            Assert.AreEqual(true,Kata.IsPangram("ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ"));
+        [Test]
+        public void IsPangram_VerifyLongString4IsPangram_ReturnTrue()=>
+            Assert.AreEqual(true,Kata.IsPangram("AbCdEfGhIjKlM zYxWvUtSrQpOn"));
+        [Test]
+        public void IsPangram_VerifyLongString5IsPangram_ReturnTrue()=>
+            Assert.AreEqual(true,Kata.IsPangram("aaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        [Test]
+        public void IsPangram_VerifyLongString6IsPangram_ReturnTrue()=>
+            Assert.AreEqual(true,Kata.IsPangram("Detect Pangram"));
+        [Test]
+        public void IsPangram_VerifyLongString7IsPangram_ReturnTrue()=>
+            Assert.AreEqual(true,Kata.IsPangram("A pangram is a sentence that contains every single letter of the alphabet at least once."));
+            // A pangram is a sentence that contains every single letter of the alphabet at least once.
     }
+    [TestFixture]
+    public class KataTests
+    {   
+        [Test]
+        // [TestCase(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0},new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1})]
+        public void MoveZeroes_MovexerostoTheEndArray_ResturnArray(
+            // int[] expectedResult, int[] result
+            )
+        {
+            //   Assert.AreEqual(expectedResult, Kata.MoveZeroes(result));
+            Assert.AreEqual(new int[] { 1, 2, 1, 1, 3, 1, 0, 0, 0, 0 }, Kata.MoveZeroes(new int[] { 1, 2, 0, 1, 0, 1, 0, 3, 0, 1 }));
+        }
         [Test]
         [TestCase("1", 1)]
         [TestCase("120", 5)]
