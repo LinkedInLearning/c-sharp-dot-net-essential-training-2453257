@@ -602,6 +602,72 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        public static string OrderWords(string words)
+        {//todo 1 - split string  2 - Find number in string  3 - create new ordered string
+            //   if (string.IsNullOrEmpty(words)) return words;
+            // return string.Join(" ", words.Split(' ').OrderBy(s => s.ToList().Find(c => char.IsDigit(c))));
+    
+        return string.Join(" ", words.Split().OrderBy(w => w.SingleOrDefault(char.IsDigit)));
+
+            /*
+            if (words.Equals(string.Empty))
+            {
+                return string.Empty;
+            }
+            string[] _auxWordsArray = words.Split(' ');
+            Dictionary<string, int> _dic = new Dictionary<string, int>();
+            foreach (var item in _auxWordsArray)
+            {
+                Console.WriteLine(item);
+                _dic.Add(item, item.Where(z => char.IsDigit(z)).Select(z => z).Single());
+            }
+            string _auxReturnString = string.Empty;
+            var _auxDic = (from z in _dic orderby z.Value ascending select z).ToDictionary(z=>z.Key,z=>z.Value);
+            _auxReturnString = string.Join(' ', _auxDic.Keys);
+            Console.WriteLine(_auxReturnString);
+            return _auxReturnString;
+            */
+        }
+        public static string AlphabetPosition(string text)
+        {//best practice
+            return string.Join(" ", text.ToLower()
+                                        .Where(l => char.IsLetter(l))
+                                        .Select(l => (int)(l - 'a' + 1)));
+            /*
+                         return string.Join(" ", text.ToLower().Where(char.IsLetter).Select(x => x - 'a' + 1));
+                            return string.Join(" ", text.Where(char.IsLetter).Select(c => c & 31));
+
+                            my solution
+                                    Dictionary<char, int> _dic = new Dictionary<char, int>();
+                                    _dic.Add('a', 1);
+                                    _dic.Add('b', 2);
+                                    _dic.Add('c', 3);
+                                    _dic.Add('d', 4);
+                                    _dic.Add('e', 5);
+                                    _dic.Add('f', 6);
+                                    _dic.Add('g', 7);
+                                    _dic.Add('h', 8);
+                                    _dic.Add('i', 9);
+                                    _dic.Add('j', 10);
+                                    _dic.Add('k', 11);
+                                    _dic.Add('l', 12);
+                                    _dic.Add('m', 13);
+                                    _dic.Add('n', 14);
+                                    _dic.Add('o', 15);
+                                    _dic.Add('p', 16);
+                                    _dic.Add('q', 17);
+                                    _dic.Add('r', 18);
+                                    _dic.Add('s', 19);
+                                    _dic.Add('t', 20);
+                                    _dic.Add('u', 21);
+                                    _dic.Add('v', 22);
+                                    _dic.Add('w', 23);
+                                    _dic.Add('x', 24);
+                                    _dic.Add('y', 25);
+                                    _dic.Add('z', 26);
+                                    return string.Join(" ", text.Where(z => char.IsLetter(z)).Select(z => _dic[char.Parse(z.ToString().ToLower())].ToString()).ToArray());
+                                */
+        }
         public static bool IsPangram(string str)
         {
             // return str.Where(ch => Char.IsLetter(ch)).Select(ch => Char.ToLower(ch)).Distinct().Count() == 26;

@@ -205,31 +205,46 @@ namespace MyConsoleAppTests
             // arrange
             // act
             // assert
-            Assert.AreEqual(true,Kata.IsPangram( "Raw Danger! (Zettai Zetsumei Toshi 2) for the PlayStation 2 is a bit queer, but an alright game I guess, uh... CJ kicks and vexes Tenpenny precariously? This should be a pangram now, probably."));
+            Assert.AreEqual(true, Kata.IsPangram("Raw Danger! (Zettai Zetsumei Toshi 2) for the PlayStation 2 is a bit queer, but an alright game I guess, uh... CJ kicks and vexes Tenpenny precariously? This should be a pangram now, probably."));
         }
         [Test]
-        public void IsPangram_VerifyLongString2IsPangram_ReturnTrue()=>
-            Assert.AreEqual(true,Kata.IsPangram("Pack my box with five dozen liquor jugs."));
+        public void IsPangram_VerifyLongString2IsPangram_ReturnTrue() =>
+            Assert.AreEqual(true, Kata.IsPangram("Pack my box with five dozen liquor jugs."));
         [Test]
-        public void IsPangram_VerifyLongString3IsPangram_ReturnTrue()=>
-            Assert.AreEqual(true,Kata.IsPangram("ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ"));
+        public void IsPangram_VerifyLongString3IsPangram_ReturnTrue() =>
+            Assert.AreEqual(true, Kata.IsPangram("ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ"));
         [Test]
-        public void IsPangram_VerifyLongString4IsPangram_ReturnTrue()=>
-            Assert.AreEqual(true,Kata.IsPangram("AbCdEfGhIjKlM zYxWvUtSrQpOn"));
+        public void IsPangram_VerifyLongString4IsPangram_ReturnTrue() =>
+            Assert.AreEqual(true, Kata.IsPangram("AbCdEfGhIjKlM zYxWvUtSrQpOn"));
         [Test]
-        public void IsPangram_VerifyLongString5IsPangram_ReturnTrue()=>
-            Assert.AreEqual(true,Kata.IsPangram("aaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        public void IsPangram_VerifyLongString5IsPangram_ReturnTrue() =>
+            Assert.AreEqual(true, Kata.IsPangram("aaaaaaaaaaaaaaaaaaaaaaaaaa"));
         [Test]
-        public void IsPangram_VerifyLongString6IsPangram_ReturnTrue()=>
-            Assert.AreEqual(true,Kata.IsPangram("Detect Pangram"));
+        public void IsPangram_VerifyLongString6IsPangram_ReturnTrue() =>
+            Assert.AreEqual(true, Kata.IsPangram("Detect Pangram"));
         [Test]
-        public void IsPangram_VerifyLongString7IsPangram_ReturnTrue()=>
-            Assert.AreEqual(true,Kata.IsPangram("A pangram is a sentence that contains every single letter of the alphabet at least once."));
-            // A pangram is a sentence that contains every single letter of the alphabet at least once.
+        public void IsPangram_VerifyLongString7IsPangram_ReturnTrue() =>
+            Assert.AreEqual(true, Kata.IsPangram("A pangram is a sentence that contains every single letter of the alphabet at least once."));
+        // A pangram is a sentence that contains every single letter of the alphabet at least once.
     }
     [TestFixture]
     public class KataTests
-    {   
+    {
+        [Test, Description("Sample Tests")]
+        public void OrderWords_OrderWordsinString_ReturnNewOrderedString()
+        {
+            Assert.AreEqual("Thi1s is2 3a T4est", Kata.OrderWords("is2 Thi1s T4est 3a"));
+            Assert.AreEqual("Fo1r the2 g3ood 4of th5e pe6ople", Kata.OrderWords("4of Fo1r pe6ople g3ood th5e the2"));
+            Assert.AreEqual("", Kata.OrderWords(""));
+        }
+        [Test]
+        [TestCase("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11","The sunset sets at twelve o' clock.")]
+        [TestCase("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20","The narwhal bacons at midnight.")]
+        public void AlphabetPosition_ReplaceCharacterByNumberPosition_ReturnString(string expected,string input)
+        {
+            Assert.AreEqual(expected , Kata.AlphabetPosition(input));
+            // Assert.AreEqual("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20", Kata.AlphabetPosition("The narwhal bacons at midnight."));
+        }
         [Test]
         // [TestCase(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0},new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1})]
         public void MoveZeroes_MovexerostoTheEndArray_ResturnArray(
