@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Net.Sockets;
 using System.Linq;
 using System.Text;
+using System.Numerics;
 // This program shows how to use the IPAddress class to obtain a server
 // IP addressess and related information.
 // using System;
@@ -602,6 +603,15 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        
+  public static string BigNumbersAdd(string a, string b)
+  {    
+        return (BigInteger.Parse(a) + BigInteger.Parse(b)).ToString(); // Fix this!
+
+//     if(BigInteger.TryParse(a,out BigInteger _a) && BigInteger.TryParse(b,out BigInteger _b))
+//     return ( _a + _b).ToString(); // Fix this!
+// else return "error";
+  }
         public static bool IsPerfectSquare(int n)
         {
             return Math.Sqrt(n) % 1 == 0;
