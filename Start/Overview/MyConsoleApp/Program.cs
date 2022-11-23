@@ -602,12 +602,16 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        public static bool IsPerfectSquare(int n)
+        {
+            return Math.Sqrt(n) % 1 == 0;
+        }
         public static string OrderWords(string words)
         {//todo 1 - split string  2 - Find number in string  3 - create new ordered string
-            //   if (string.IsNullOrEmpty(words)) return words;
-            // return string.Join(" ", words.Split(' ').OrderBy(s => s.ToList().Find(c => char.IsDigit(c))));
-    
-        return string.Join(" ", words.Split().OrderBy(w => w.SingleOrDefault(char.IsDigit)));
+         //   if (string.IsNullOrEmpty(words)) return words;
+         // return string.Join(" ", words.Split(' ').OrderBy(s => s.ToList().Find(c => char.IsDigit(c))));
+
+            return string.Join(" ", words.Split().OrderBy(w => w.SingleOrDefault(char.IsDigit)));
 
             /*
             if (words.Equals(string.Empty))

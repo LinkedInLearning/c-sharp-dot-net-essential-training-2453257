@@ -230,6 +230,15 @@ namespace MyConsoleAppTests
     [TestFixture]
     public class KataTests
     {
+        [Test]
+        public static void IsPerfectSquare_VerifyIfItsPerfectSquare_ReturnTrueIfItsPerfectSquareOotherwiseFalse()
+        {
+            Assert.AreEqual(false, Kata.IsPerfectSquare(-1), "negative numbers aren't square numbers");
+            Assert.AreEqual(false, Kata.IsPerfectSquare(3), "3 isn't a square number");
+            Assert.AreEqual(true, Kata.IsPerfectSquare(4), "4 is a square number");
+            Assert.AreEqual(true, Kata.IsPerfectSquare(25), "25 is a square number");
+            Assert.AreEqual(false, Kata.IsPerfectSquare(26), "26 isn't a square number");
+        }
         [Test, Description("Sample Tests")]
         public void OrderWords_OrderWordsinString_ReturnNewOrderedString()
         {
@@ -238,11 +247,11 @@ namespace MyConsoleAppTests
             Assert.AreEqual("", Kata.OrderWords(""));
         }
         [Test]
-        [TestCase("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11","The sunset sets at twelve o' clock.")]
-        [TestCase("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20","The narwhal bacons at midnight.")]
-        public void AlphabetPosition_ReplaceCharacterByNumberPosition_ReturnString(string expected,string input)
+        [TestCase("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11", "The sunset sets at twelve o' clock.")]
+        [TestCase("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20", "The narwhal bacons at midnight.")]
+        public void AlphabetPosition_ReplaceCharacterByNumberPosition_ReturnString(string expected, string input)
         {
-            Assert.AreEqual(expected , Kata.AlphabetPosition(input));
+            Assert.AreEqual(expected, Kata.AlphabetPosition(input));
             // Assert.AreEqual("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20", Kata.AlphabetPosition("The narwhal bacons at midnight."));
         }
         [Test]
