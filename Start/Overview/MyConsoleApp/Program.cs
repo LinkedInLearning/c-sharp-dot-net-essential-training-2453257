@@ -604,14 +604,36 @@ one every 3 is eliminated until one remains
     public static class Kata
     {
         
-  public static string BigNumbersAdd(string a, string b)
-  {    
-        return (BigInteger.Parse(a) + BigInteger.Parse(b)).ToString(); // Fix this!
+        public static int[] ArrayDiff(int[] a, int[] b)
+        {
+            // if (a.Length == b.Length)
+            // {
+            // List<int> _list = new List<int>();
+            // int _aLength = a.Length - 1;
+            // int _bLength = b.Length - 1;
+            // for (int i = 0; i < a.Length; i++)
+            // {
+                // for (int j = 0; j < b.Length; j++)
+                // {
+                // _list.Add(Math.Abs(b[i <= _bLength ? i : _bLength]) - Math.Abs(a[i <= _aLength ? i : _aLength]));
+                // }
+            // }
+            var _expectedResult = a.Except(b).ToArray();
+            // foreach (var item in _expectedResult) Console.WriteLine($"-{item}");
+            return _expectedResult;
+            // }
+            // var _q = a.SkipWhile(z => z != a[0]).ToArray();
+            // foreach (var item in _q) Console.WriteLine(item);
+            // return _q;
+        }
+        public static string BigNumbersAdd(string a, string b)
+        {
+            return (BigInteger.Parse(a) + BigInteger.Parse(b)).ToString(); // Fix this!
 
-//     if(BigInteger.TryParse(a,out BigInteger _a) && BigInteger.TryParse(b,out BigInteger _b))
-//     return ( _a + _b).ToString(); // Fix this!
-// else return "error";
-  }
+            //     if(BigInteger.TryParse(a,out BigInteger _a) && BigInteger.TryParse(b,out BigInteger _b))
+            //     return ( _a + _b).ToString(); // Fix this!
+            // else return "error";
+        }
         public static bool IsPerfectSquare(int n)
         {
             return Math.Sqrt(n) % 1 == 0;

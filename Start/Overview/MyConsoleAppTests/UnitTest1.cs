@@ -208,8 +208,15 @@ namespace MyConsoleAppTests
             Assert.AreEqual(true, Kata.IsPangram("Raw Danger! (Zettai Zetsumei Toshi 2) for the PlayStation 2 is a bit queer, but an alright game I guess, uh... CJ kicks and vexes Tenpenny precariously? This should be a pangram now, probably."));
         }
         [Test]
-        public void IsPangram_VerifyLongString2IsPangram_ReturnTrue() =>
-            Assert.AreEqual(true, Kata.IsPangram("Pack my box with five dozen liquor jugs."));
+        [TestCase(true, "Pack my box with five dozen liquor jugs.")]
+        [TestCase(true, "ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ")]
+        [TestCase(true, "AbCdEfGhIjKlM zYxWvUtSrQpOn")]
+        [TestCase(true, "aaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        [TestCase(true, "Detect Pangram")]
+        [TestCase(true, "A pangram is a sentence that contains every single letter of the alphabet at least once.")]
+
+        public void IsPangram_VerifyLongString2IsPangram_ReturnTrue(bool expected, string input) =>
+            Assert.AreEqual(expected, Kata.IsPangram(input));
         [Test]
         public void IsPangram_VerifyLongString3IsPangram_ReturnTrue() =>
             Assert.AreEqual(true, Kata.IsPangram("ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ"));
@@ -230,6 +237,17 @@ namespace MyConsoleAppTests
     [TestFixture]
     public class KataTests
     {
+        [Test]
+        // [TestCase(new int[] { 2 }       , new int[] { 1, 2 }, new int[] { 1 })]//passed
+        [TestCase(new int[] { 2, 2 }, new int[] { 1, 2, 2 }, new int[] { 1 })] //not passed
+        // [TestCase(new int[] { 1 }       , new int[] { 1, 2, 2 }, new int[] { 2 })]//passed
+        // [TestCase(new int[] { 1, 2, 2 } , new int[] { 1, 2, 2 }, new int[] { })]not passed
+        // [TestCase(new int[] { }         , new int[] { }, new int[] { 1, 2 })]//passed
+        // [TestCase(new int[] { 3 }       , new int[] { 1, 2, 3 }, new int[] { 1, 2 })]//passed
+        public void ArrayDiff_ReturnArrayDiff(int[] expected, int[] input1, int[] input2)
+        {
+            Assert.AreEqual(expected, Kata.ArrayDiff(input1, input2));
+        }
         [Test]
         public void BigNumbersAdd_SumTwoBigIntegers_ReturnSumValue()
         {
