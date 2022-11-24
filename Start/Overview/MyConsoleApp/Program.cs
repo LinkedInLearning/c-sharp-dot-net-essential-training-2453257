@@ -603,6 +603,36 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        public static string ReverseWords(string str)
+        {
+            return string.Join(' ',str.Split(' ').Select(z=>new string(z.Reverse().ToArray())));
+            /*
+            var _aux1 = str.Split(' ');
+            string _return = string.Empty;
+            for (int i = 0; i < _aux1.Length; i++){
+             
+                var _q = _aux1[i].AsEnumerable().Reverse();
+                _return+=$"{string.Join(' ',new string(_q.ToArray()))}";
+                if(!i.Equals(_aux1.Length-1)) _return+=' ';
+            }
+            return _return;
+            */
+        }
+        public static bool StringEndsWith(string str, string ending)
+        {
+            //best practices
+            return str.EndsWith(ending);
+            /*
+                        // TODO: complete
+                        int _endingLength = ending.Length;
+                        int _diffLength = str.Length - _endingLength;
+                        var _q = new string(str.Skip(_diffLength).ToArray());
+                        if (!ending.Equals(_q)) return false;
+                            Console.WriteLine($"_endingLength: {_endingLength}");
+                            Console.WriteLine($"str.Length- _endingLength: {str.Length- _endingLength}\n_q {_q}\nending {ending}");
+                        return true;
+                        */
+        }
         public static string[] SplitString(string str)
         {
             // return Regex.Matches(str + "_", @"\w{2}").Select(x => x.Value).ToArray();

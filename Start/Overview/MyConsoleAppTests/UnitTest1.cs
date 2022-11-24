@@ -235,11 +235,44 @@ namespace MyConsoleAppTests
         // A pangram is a sentence that contains every single letter of the alphabet at least once.
     }
     [TestFixture]
+    public class StringEndsWith
+    {
+        private static object[] sampleTestCases = new object[]
+        {
+      new object[] {"samurai", "ai", true},
+      new object[] {"sumo", "omo", false},
+      new object[] {"ninja", "ja", true},
+      new object[] {"sensei", "i", true},
+      new object[] {"samurai", "ra", false},
+      new object[] {"abc", "abcd", false},
+      new object[] {"abc", "abc", true},
+      new object[] {"abcabc", "bc", true},
+      new object[] {"ails", "fails", false},
+      new object[] {"fails", "ails", true},
+      new object[] {"this", "fails", false},
+      new object[] {"abc", "", true},
+      new object[] {":-)", ":-(", false},
+      new object[] {"!@#$%^&*() :-)", ":-)", true},
+      new object[] {"abc\n", "abc", false},
+        };
+
+        [Test, TestCaseSource("sampleTestCases")]
+        public void Test_ValidateIfEnds_ReturnBool(string str, string ending, bool expected)
+        {
+            Assert.AreEqual(expected, Kata.StringEndsWith(str, ending));
+        }
+    }
+
+    [TestFixture]
     public class KataTests
     {
         [Test]
+        [TestCase("sihT si na !elpmaxe", "This is an example!")]
+        [TestCase("sihT si na tset", "This is an test")]
+        public void ReverseWords_ReturnString(string expected, string input) => Assert.AreEqual(expected, Kata.ReverseWords(input));
+        [Test]
         [TestCase(new string[] { "ab", "c_" }, "abc")]
-         [TestCase(new string[] { "ab", "cd", "ef" }, "abcdef")]
+        [TestCase(new string[] { "ab", "cd", "ef" }, "abcdef")]
         public void SplitString(string[] expected, string input) => Assert.AreEqual(expected, Kata.SplitString(input));
         [Test]
         // [TestCase(new int[] { 2 }       , new int[] { 1, 2 }, new int[] { 1 })]//passed
