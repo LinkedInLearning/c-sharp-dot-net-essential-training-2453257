@@ -603,7 +603,67 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
-        
+        public static string[] SplitString(string str)
+        {
+            // return Regex.Matches(str + "_", @"\w{2}").Select(x => x.Value).ToArray();
+
+            if (str.Length % 2 != 0)
+                str += "_";
+            return Enumerable.Range(0, str.Length)
+              .Where(x => x % 2 == 0)
+              .Select(x => str.Substring(x, 2))
+              .ToArray();
+
+            /*
+                        if (str.Length % 2 == 1)
+                            str += "_";
+
+                        List<string> list = new List<string>();
+                        for (int i = 0; i < str.Length; i += 2)
+                        {
+                            list.Add(str[i].ToString() + str[i + 1]);
+                        }
+
+                        return list.ToArray();
+                        */
+
+            /*
+                        bool _auxBool = str.Length % 2 == 0;
+                        string _auxString = string.Empty;
+                        List<string> _auxList = new List<string>();
+                        int _auxCounter = 0;
+                        int _byPass = 2;
+                        if (_auxBool)
+                        {
+                            Console.WriteLine("->1");
+                            for (int i = 0; i < str.Length; i = i + _byPass)
+                            {
+                                _auxList.Add(str.Substring(_auxCounter, _byPass));
+                                _auxCounter += _byPass;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("->2");
+                            for (int i = 0; i < str.Length; i = i + _byPass)
+                            {
+                                if (_auxCounter < str.Length - 1)
+                                {
+                                    Console.WriteLine("->3");
+                                    _auxList.Add(str.Substring(_auxCounter, _byPass));
+                                }
+                                else
+                                {
+                                    Console.WriteLine("->4");
+                                    Console.WriteLine($"_auxCounter {_auxCounter}");
+                                    _auxList.Add($"{str.Substring(_auxCounter)}_");
+                                }
+                                _auxCounter += _byPass;
+                            }
+                        }
+                        return _auxList.ToArray();
+                        */
+        }
         public static int[] ArrayDiff(int[] a, int[] b)
         {
             // if (a.Length == b.Length)
@@ -613,10 +673,10 @@ one every 3 is eliminated until one remains
             // int _bLength = b.Length - 1;
             // for (int i = 0; i < a.Length; i++)
             // {
-                // for (int j = 0; j < b.Length; j++)
-                // {
-                // _list.Add(Math.Abs(b[i <= _bLength ? i : _bLength]) - Math.Abs(a[i <= _aLength ? i : _aLength]));
-                // }
+            // for (int j = 0; j < b.Length; j++)
+            // {
+            // _list.Add(Math.Abs(b[i <= _bLength ? i : _bLength]) - Math.Abs(a[i <= _aLength ? i : _aLength]));
+            // }
             // }
             var _expectedResult = a.Except(b).ToArray();
             // foreach (var item in _expectedResult) Console.WriteLine($"-{item}");

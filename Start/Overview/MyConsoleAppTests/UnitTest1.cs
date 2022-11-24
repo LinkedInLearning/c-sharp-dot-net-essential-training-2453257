@@ -238,6 +238,10 @@ namespace MyConsoleAppTests
     public class KataTests
     {
         [Test]
+        [TestCase(new string[] { "ab", "c_" }, "abc")]
+         [TestCase(new string[] { "ab", "cd", "ef" }, "abcdef")]
+        public void SplitString(string[] expected, string input) => Assert.AreEqual(expected, Kata.SplitString(input));
+        [Test]
         // [TestCase(new int[] { 2 }       , new int[] { 1, 2 }, new int[] { 1 })]//passed
         [TestCase(new int[] { 2, 2 }, new int[] { 1, 2, 2 }, new int[] { 1 })] //not passed
         // [TestCase(new int[] { 1 }       , new int[] { 1, 2, 2 }, new int[] { 2 })]//passed
