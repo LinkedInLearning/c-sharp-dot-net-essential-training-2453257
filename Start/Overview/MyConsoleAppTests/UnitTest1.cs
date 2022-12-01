@@ -267,6 +267,26 @@ namespace MyConsoleAppTests
     public class KataTests
     {
         [Test]
+        public static void ToWeirdCase_Scramble_ReturnWordScrambled()
+        {
+            Assert.AreEqual("ThIs", Kata.ToWeirdCase("This"));
+            Assert.AreEqual("Is", Kata.ToWeirdCase("is"));
+            Assert.AreEqual("ThIs Is A TeSt", Kata.ToWeirdCase("This is a test"));
+        }
+        [Test]
+        [TestCase(0, "")]
+        [TestCase(0, "abcde")]
+        [TestCase(2, "aabbcde")]
+        [TestCase(1, "Indivisibility")]
+        public void DuplicateCount_CountDuplicates_ReturnTotalDuplicates(int expected, string input)
+        => Assert.AreEqual(expected, Kata.DuplicateCount(input));
+        [Test]
+        public void DuplicateCount_CountDuplicatesAndIgnoreCase_ReturnTotalDuplicates()
+        => Assert.AreEqual(2, Kata.DuplicateCount("aabBcde"), "should ignore case");
+        [Test]
+        public void DuplicateCount_CountDuplicatesAndNoCharactersAdjacent_ReturnTotalDuplicates()
+        => Assert.AreEqual(2, Kata.DuplicateCount("Indivisibilities"), "characters may not be adjacent");
+        [Test]
         [TestCase("sihT si na !elpmaxe", "This is an example!")]
         [TestCase("sihT si na tset", "This is an test")]
         public void ReverseWords_ReturnString(string expected, string input) => Assert.AreEqual(expected, Kata.ReverseWords(input));
