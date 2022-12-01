@@ -267,6 +267,14 @@ namespace MyConsoleAppTests
     public class KataTests
     {
         [Test]
+        public void DuplicateEncode_EncodeWord_ReturnEncoded()
+        {
+            Assert.AreEqual("(((", Kata.DuplicateEncode("din"));
+            Assert.AreEqual("()()()", Kata.DuplicateEncode("recede"));
+            Assert.AreEqual(")())())", Kata.DuplicateEncode("Success"), "should ignore case");
+            Assert.AreEqual("))((", Kata.DuplicateEncode("(( @"));
+        }
+        [Test]
         public static void ToWeirdCase_Scramble_ReturnWordScrambled()
         {
             Assert.AreEqual("ThIs", Kata.ToWeirdCase("This"));

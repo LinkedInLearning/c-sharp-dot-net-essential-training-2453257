@@ -603,36 +603,40 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        public static string DuplicateEncode(string word)
+        {
+            return string.Join("", word.ToLower().Select(z => word.Count(x=>z==x)>1?")":"("));
+        }
         public static string ToWeirdCase(string s)
         {
-             return string.Join(" ",s.Split(' ').Select(w => string.Concat(w.Select((ch, i) => i % 2 == 0 ? char.ToUpper(ch) : char.ToLower(ch)
-      ))));
-/*
-            Console.WriteLine($"s {s}");
-            if (s.Equals(string.Empty)) return new string(' ', s.Length);
-            string[] _aux = s.Split(' ');
-            string _auxString = "";
-            foreach (var item in _aux)
-            {
-                bool _isDivisibleBy2 = item.Length % 2 == 0;
-                int _auxLength = item.Length;
-                for (int i = 0; i < _auxLength; i++)
-                {
-                    Console.WriteLine($"item[i]: {item[i]}");
-                    if (char.IsWhiteSpace(item[i])) _auxString += " ";
-                    else
-                    {
-                        bool _auxInt = i % 2 == 0;
-                        if (_auxInt)
-                            _auxString += $"{char.ToUpper(item[i])}";
-                        else
-                            _auxString += $"{char.ToLower(item[i])}";
-                    }
-                }
-                _auxString += " ";
-            }
-            return _auxString.TrimEnd(' ');
-            */
+            return string.Join(" ", s.Split(' ').Select(w => string.Concat(w.Select((ch, i) => i % 2 == 0 ? char.ToUpper(ch) : char.ToLower(ch)
+     ))));
+            /*
+                        Console.WriteLine($"s {s}");
+                        if (s.Equals(string.Empty)) return new string(' ', s.Length);
+                        string[] _aux = s.Split(' ');
+                        string _auxString = "";
+                        foreach (var item in _aux)
+                        {
+                            bool _isDivisibleBy2 = item.Length % 2 == 0;
+                            int _auxLength = item.Length;
+                            for (int i = 0; i < _auxLength; i++)
+                            {
+                                Console.WriteLine($"item[i]: {item[i]}");
+                                if (char.IsWhiteSpace(item[i])) _auxString += " ";
+                                else
+                                {
+                                    bool _auxInt = i % 2 == 0;
+                                    if (_auxInt)
+                                        _auxString += $"{char.ToUpper(item[i])}";
+                                    else
+                                        _auxString += $"{char.ToLower(item[i])}";
+                                }
+                            }
+                            _auxString += " ";
+                        }
+                        return _auxString.TrimEnd(' ');
+                        */
         }
         ///Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
         public static int DuplicateCount(string str)
