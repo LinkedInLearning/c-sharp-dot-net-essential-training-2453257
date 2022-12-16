@@ -601,9 +601,98 @@ one every 3 is eliminated until one remains
             return -1;
         }
     }
+    public class LongestConsecutives
+    {
+        public static string LongestConsec(string[] strarr, int k)
+        {//todo 1- in k cicles 2- calculate the sum of two strings 3- if _highestLength it's not higher then _currentLength, then _highestLength=_currentLength
+            int _highestLength = 0;
+            string _currentString = string.Empty;
+            string _highestString = string.Empty;
+            if (strarr.Length < k)
+            {
+                return string.Empty;
+            }
+            for (int i = 0; i < k; i++)
+            {
+                _currentString = strarr[i] + strarr[i + 1];
+                if (_highestLength < _currentString.Length)
+                {
+                    _highestLength = _currentString.Length;
+                    _highestString = _currentString;
+                }
+            }
+            return _highestString;
+        }
+    }
     public static class Kata
     {
+        public static IEnumerable<int> GetIntegersFromList(List<object> listOfItems)
+        {
+            listOfItems.ForEach(z=>Console.WriteLine(z));
+            IEnumerable<int> _aux= listOfItems.OfType<int>().Select(z=>z);
+            // foreach (var item in _aux)
+            // {
+            //     Console.WriteLine($"-{item}");
+            // }
+            _aux.ToList().ForEach(z=>Console.WriteLine(z));
 
+            return _aux;
+        }
+        public static string AreYouPlayingBanjo(string name)
+        {
+            return name.ToLower()[0] == 'r' ? name + " plays banjo" : name + " does not play banjo";
+            /*
+                        if (name.First().Equals('r') || name.First().Equals('R'))
+                            return $"{name} plays banjo";
+                        return $"{name} does not play banjo";
+            */
+        }
+        public static int TotalPoints(string[] games)
+        {
+            return games.Sum(s => s[0] < s[2] ? 0 : s[0] == s[2] ? 1 : 3);
+            /*
+             int total = 0;
+    foreach (string game in games) {
+      if (game[0] > game[2])
+        total += 3;
+      else if (game[0] == game[2])
+        total += 1;            
+    }
+    return total;
+    */
+            /*
+                        int _auxTotal = 0;
+                        int _win = 3;
+                        int _draw = 1;
+
+                        for (int i = 0; i < games.Length; i++)
+                        {
+                            int.TryParse(games[i].Split(':').First(), out var _auxTeam1TotalGoals);
+                            int.TryParse(games[i].Split(':').ElementAt(1), out var _auxTeam2TotalGoals);
+                            if (_auxTeam1TotalGoals > _auxTeam2TotalGoals) _auxTotal += _win;
+                            if (_auxTeam1TotalGoals.Equals(_auxTeam2TotalGoals)) _auxTotal += _draw;
+                        }
+                        return _auxTotal;
+                        */
+        }
+        public static int SumPositives(int[] numbers)
+        {
+            if (numbers.Length.Equals(0) || numbers.Length.Equals(1) || numbers.Equals(null)) return -1;
+            List<int> _auxList = numbers.ToList();
+            _auxList.Remove(_auxList.Min());
+            _auxList.Remove(_auxList.Max());
+            return _auxList.Sum();
+        }
+        public static string[] SplitStrings(string str)
+        {
+            if (str.Length % 2 != 0) str += "_";
+            return Enumerable.Range(0, str.Length).Where(x => x % 2 == 0).Select(x => str.Substring(x, 2)).ToArray();
+        }
+        public static int PositiveSum(int[] arr)
+        {
+            return arr.Sum(c => (c < 0 ? 0 : c));
+            //return arr.Where(z=>z>0).Sum();
+        }
         public static int SumTwoSmallestNumbers(int[] numbers)
         {
             return numbers.OrderBy(i => i).Take(2).Sum();

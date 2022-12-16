@@ -121,6 +121,29 @@ namespace Solution
 namespace
 MyConsoleAppTests
 {
+
+    [TestFixture]
+    public static class LongestConsecutivesTests
+    {
+        private static void testing(string actual, string expected)
+        {
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        [TestCase(new String[] { "zone", "abigail", "theta", "form", "libe", "zas", "theta", "abigail" }, 2, "abigailtheta")]
+        [TestCase(new String[] { }, 3, "")]
+        [TestCase(new String[] { "itvayloxrp", "wkppqsztdkmvcuwvereiupccauycnjutlv", "vweqilsfytihvrzlaodfixoyxvyuyvgpck" }, 2, "wkppqsztdkmvcuwvereiupccauycnjutlvvweqilsfytihvrzlaodfixoyxvyuyvgpck")]
+        [TestCase(new String[] { "wlwsasphmxx", "owiaxujylentrklctozmymu", "wpgozvxxiu" }, 2, "wlwsasphmxxowiaxujylentrklctozmymu")]
+        [TestCase(new String[] { "zone", "abigail", "theta", "form", "libe", "zas" }, -2, "")]
+        // [TestCase(new String[] { "it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz" }, 3, "ixoyx3452zzzzzzzzzzzz")]
+        [TestCase(new String[] { "it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz" }, 15, "")]
+        [TestCase(new String[] { "it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz" }, 0, "")]
+        public static void test1(string[] array, int k, string expected)
+        {
+            Console.WriteLine("Basic Tests");
+            testing(LongestConsecutives.LongestConsec(array, k), expected);
+        }
+    }
     [TestFixture]
     public class JadenCaseTest
     {
@@ -287,13 +310,118 @@ MyConsoleAppTests
             Assert.AreEqual(3453455, Kata.SumTwoSmallestNumbers(numbers));
         }
     }
+
+    [TestFixture]
+    public class GetIntegersFromListClassTests
+    {
+        [Test]
+        public void GetIntegersFromList_MixedValues_ShouldPass_1()
+        {
+            var list = new List<object>() { 1, 2, "a", "b" };
+            var expected = new List<int>() { 1, 2 };
+            var actual = Kata.GetIntegersFromList(list);
+            Assert.IsTrue(expected.SequenceEqual(actual));
+        }
+        [Test]
+        public void GetIntegersFromList_MixedValues_ShouldPass_2()
+        {
+            var list = new List<object>() { 1, "a", "b", 0, 15 };
+            var expected = new List<int>() { 1, 0, 15 };
+            var actual = Kata.GetIntegersFromList(list);
+            Assert.IsTrue(expected.SequenceEqual(actual));
+        }
+        [Test]
+        public void GetIntegersFromList_MixedValues_ShouldPass_3()
+        {
+            var list = new List<object>() { 1, 2, "aasf", "1", "123", 123 };
+            var expected = new List<int>() { 1, 2, 123 };
+            var actual = Kata.GetIntegersFromList(list);
+            Assert.IsTrue(expected.SequenceEqual(actual));
+        }
+    }
+    [TestFixture]
+    public class AreYouPlayingBanjo
+    {
+        [Test]
+        public static void Martin()
+        {
+            Assert.AreEqual("Martin does not play banjo", Kata.AreYouPlayingBanjo("Martin"));
+        }
+
+        [Test]
+        public static void Rikke()
+        {
+            Assert.AreEqual("Rikke plays banjo", Kata.AreYouPlayingBanjo("Rikke"));
+        }
+
+        [Test]
+        public static void bravo()
+        {
+            Assert.AreEqual("bravo does not play banjo", Kata.AreYouPlayingBanjo("bravo"));
+        }
+
+        [Test]
+        public static void rolf()
+        {
+            Assert.AreEqual("rolf plays banjo", Kata.AreYouPlayingBanjo("rolf"));
+        }
+    }
+    [TestFixture]
+    public class TotalPointsTest
+    {
+
+        [Test]
+        public void Test1() =>
+            Test(new[] { "1:0", "2:0", "3:0", "4:0", "2:1", "3:1", "4:1", "3:2", "4:2", "4:3" }, 30);
+
+        [Test]
+        public void Test2() =>
+            Test(new[] { "1:1", "2:2", "3:3", "4:4", "2:2", "3:3", "4:4", "3:3", "4:4", "4:4" }, 10);
+
+        [Test]
+        public void Test3() =>
+            Test(new[] { "0:1", "0:2", "0:3", "0:4", "1:2", "1:3", "1:4", "2:3", "2:4", "3:4" }, 0);
+
+        [Test]
+        public void Test4() =>
+            Test(new[] { "1:0", "2:0", "3:0", "4:0", "2:1", "1:3", "1:4", "2:3", "2:4", "3:4" }, 15);
+
+        [Test]
+        public void Test5() =>
+            Test(new[] { "1:0", "2:0", "3:0", "4:4", "2:2", "3:3", "1:4", "2:3", "2:4", "3:4" }, 12);
+
+        private void Test(string[] input, int expectedOutput) =>
+            Assert.AreEqual(expectedOutput, Kata.TotalPoints(input));
+
+    }
     [TestFixture]
     public class KataTests
     {
         [Test]
-        [TestCase("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11","The sunset sets at twelve o' clock.")]
-        [TestCase("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20","The narwhal bacons at midnight.")]
-        public void AlphabetPosition1Test_ConstructnewStringWithPositionLetters_ReturnString(string expected,string input)
+        public void SumPositives_CalculateSum_ReturnSum()
+        {
+            Assert.AreEqual(16, Kata.SumPositives(new[] { 6, 2, 1, 8, 10 }));
+        }
+        [Test]
+        public void SplitStrings_SplitString_ReturnArray()
+        {
+            Assert.AreEqual(new string[] { "ab", "c_" }, Kata.SplitStrings("abc"));
+            Assert.AreEqual(new string[] { "ab", "cd", "ef" }, Kata.SplitStrings("abcdef"));
+        }
+        [Test]
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, ExpectedResult = 15)]
+        [TestCase(new int[] { 1, -2, 3, 4, 5 }, ExpectedResult = 13)]
+        [TestCase(new int[] { -1, 2, 3, 4, -5 }, ExpectedResult = 9)]
+        [TestCase(new int[] { }, ExpectedResult = 0)]
+        [TestCase(new int[] { -1, -2, -3, -4, -5 }, ExpectedResult = 0)]
+        public static int PositiveSum_Return(int[] arr)
+        {
+            return Kata.PositiveSum(arr);
+        }
+        [Test]
+        [TestCase("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11", "The sunset sets at twelve o' clock.")]
+        [TestCase("20 8 5 14 1 18 23 8 1 12 2 1 3 15 14 19 1 20 13 9 4 14 9 7 8 20", "The narwhal bacons at midnight.")]
+        public void AlphabetPosition1Test_ConstructnewStringWithPositionLetters_ReturnString(string expected, string input)
         {
             Assert.AreEqual(expected, Kata.AlphabetPosition1(input));
         }
