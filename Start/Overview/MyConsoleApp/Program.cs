@@ -626,15 +626,36 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        public static string RepeatStr(int n, string s)
+        {
+            return  string.Join("",Enumerable.Repeat(s,n));
+            
+            // Console.WriteLine($"n {n}\ns {s}");
+            // if (n==0)return string.Empty;
+            // string _auxS = s;
+            // for (int i = 0; i < n-1; i++)
+            //         _auxS+=s;
+            // return _auxS;
+        }
+        public static int GetVowelCount(string str)
+        {
+            // return str.Count(i => "aeiou".Contains(i));
+            return str.Count(z => z.Equals('a') || z.Equals('e') || z.Equals('i') || z.Equals('o') || z.Equals('u'));
+        }
+        public static String Accum(string s)
+        {
+            // Thread.CurrentThread.CurrentUICulture =  Thread.CurrentThread.CurrentCulture;
+            return string.Join("", s.Split('-', StringSplitOptions.TrimEntries));
+        }
         public static IEnumerable<int> GetIntegersFromList(List<object> listOfItems)
         {
-            listOfItems.ForEach(z=>Console.WriteLine(z));
-            IEnumerable<int> _aux= listOfItems.OfType<int>().Select(z=>z);
+            listOfItems.ForEach(z => Console.WriteLine(z));
+            IEnumerable<int> _aux = listOfItems.OfType<int>().Select(z => z);
             // foreach (var item in _aux)
             // {
             //     Console.WriteLine($"-{item}");
             // }
-            _aux.ToList().ForEach(z=>Console.WriteLine(z));
+            _aux.ToList().ForEach(z => Console.WriteLine(z));
 
             return _aux;
         }

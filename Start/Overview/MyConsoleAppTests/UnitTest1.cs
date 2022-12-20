@@ -312,6 +312,25 @@ MyConsoleAppTests
     }
 
     [TestFixture]
+    public static class AccumulTests
+    {
+
+        private static void testing(string actual, string expected)
+        {
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public static void test1()
+        {
+            testing(Kata.Accum("ZpglnRxqenU"), "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu");
+            // testing(Kata.Accum("NyffsGeyylB"), "N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb");
+            // testing(Kata.Accum("MjtkuBovqrU"), "M-Jj-Ttt-Kkkk-Uuuuu-Bbbbbb-Ooooooo-Vvvvvvvv-Qqqqqqqqq-Rrrrrrrrrr-Uuuuuuuuuuu");
+            // testing(Kata.Accum("EvidjUnokmM"), "E-Vv-Iii-Dddd-Jjjjj-Uuuuuu-Nnnnnnn-Oooooooo-Kkkkkkkkk-Mmmmmmmmmm-Mmmmmmmmmmm");
+            // testing(Kata.Accum("HbideVbxncC"), "H-Bb-Iii-Dddd-Eeeee-Vvvvvv-Bbbbbbb-Xxxxxxxx-Nnnnnnnnn-Cccccccccc-Ccccccccccc");
+        }
+    }
+    [TestFixture]
     public class GetIntegersFromListClassTests
     {
         [Test]
@@ -397,6 +416,13 @@ MyConsoleAppTests
     [TestFixture]
     public class KataTests
     {
+        [Test(Description = "Fixed Tests")]
+        public void FixedTests()
+        {
+            Assert.AreEqual("***", Kata.RepeatStr(3, "*"));
+            Assert.AreEqual("#####", Kata.RepeatStr(5, "#"));
+            Assert.AreEqual("ha ha ", Kata.RepeatStr(2, "ha "));
+        }
         [Test]
         public void SumPositives_CalculateSum_ReturnSum()
         {
