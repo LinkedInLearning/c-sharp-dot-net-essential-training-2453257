@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mymicroservice
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mymicroservice
+    spec:
+      containers:
+      - name: mymicroservice
+        image: 01ba53e60239/mymicroservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+  selector:
+    matchLabels:
+      app: mymicroservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mymicroservice
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: mymicroservice

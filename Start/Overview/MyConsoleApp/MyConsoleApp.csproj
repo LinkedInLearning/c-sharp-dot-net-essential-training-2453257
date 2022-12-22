@@ -1,3 +1,4 @@
+
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -5,6 +6,15 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>MyConsoleApp.Program</StartupObject>
+
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.net.test.sdk" Version="17.3.1" />
+    <PackageReference Include="Nunit" Version="3.13.3" />
+    <PackageReference Include="Nunit3TestAdapter" Version="4.2.1" />
+  </ItemGroup>
+
 </Project>
+
