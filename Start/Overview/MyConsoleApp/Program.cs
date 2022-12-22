@@ -626,10 +626,34 @@ one every 3 is eliminated until one remains
     }
     public static class Kata
     {
+        public static int Litres(double time)
+        {
+            return Convert.ToInt32((Math.Round((time * 0.5), 0, MidpointRounding.ToZero)));
+        }
+        public static string High(string s)
+        {
+            return s.Split(' ').OrderBy(a => a.Select(b => b - 96).Sum()).Last();
+
+            // =>  s.Split(' ').OrderBy(w => w.Sum(c => c - 'a' + 1)).Last();
+
+            // int _auxSum = 0;
+            // int _auxMax = 0;
+            // string _auxWord = string.Empty;
+            // foreach (var item in s.Split(' '))
+            // {
+            //     _auxSum = item.Sum(z => "abcdefghijklmnopqrstuvwxyz".IndexOf(z) + 1);
+            //     if (_auxMax < _auxSum)
+            //     {
+            //         _auxMax = _auxSum;
+            //         _auxWord = item;
+            //     }
+            // }
+            // return _auxWord;
+        }
         public static string RepeatStr(int n, string s)
         {
-            return  string.Join("",Enumerable.Repeat(s,n));
-            
+            return string.Join("", Enumerable.Repeat(s, n));
+
             // Console.WriteLine($"n {n}\ns {s}");
             // if (n==0)return string.Empty;
             // string _auxS = s;

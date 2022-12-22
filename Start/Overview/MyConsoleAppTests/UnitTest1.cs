@@ -413,6 +413,73 @@ MyConsoleAppTests
             Assert.AreEqual(expectedOutput, Kata.TotalPoints(input));
 
     }
+[TestFixture]
+public class LitresClassTests
+{
+  [Test]
+  public static void Test1()
+  {
+    Assert.AreEqual(1, Kata.Litres(2));
+  }
+  
+  [Test]
+  public static void Test2()
+  {  
+    Assert.AreEqual(0, Kata.Litres(1.4));
+  }
+  
+  [Test]
+  public static void Test3()
+  {
+    Assert.AreEqual(6, Kata.Litres(12.3));
+  }
+  
+  [Test]
+  public static void Test4()
+  {
+    Assert.AreEqual(0, Kata.Litres(0.82));
+  }
+  
+  [Test]
+  public static void Test5()
+  {
+    Assert.AreEqual(5, Kata.Litres(11.8));
+  }
+  
+  [Test]
+  public static void Test6()
+  {
+    Assert.AreEqual(893, Kata.Litres(1787));
+  }
+  [Test]
+  public static void Test7()
+  {
+    Assert.AreEqual(0, Kata.Litres(0));
+  }
+
+}
+    [TestFixture]
+    public class Sample_Tests
+    {
+        private static IEnumerable<TestCaseData> testCases
+        {
+            get
+            {
+                yield return new TestCaseData("man i need a taxi up to ubud").Returns("taxi");
+                yield return new TestCaseData("what time are we climbing up to the volcano").Returns("volcano");
+                yield return new TestCaseData("take me to semynak").Returns("semynak");
+                yield return new TestCaseData("aa b").Returns("aa");
+                yield return new TestCaseData("b aa").Returns("b");
+                yield return new TestCaseData("bb d").Returns("bb");
+                yield return new TestCaseData("d bb").Returns("d");
+                yield return new TestCaseData("aaa b").Returns("aaa");
+            }
+        }
+
+        [Test, TestCaseSource("testCases")]
+        public string Test(string s) => Kata.High(s);
+    }
+
     [TestFixture]
     public class KataTests
     {
